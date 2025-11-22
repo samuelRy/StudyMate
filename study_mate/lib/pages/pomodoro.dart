@@ -45,15 +45,18 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
       child: Stack(
         children: [
           Positioned.fill(
-                    child: Opacity(
-                      opacity: 0.5,
-                      child: Lottie.asset(
-                        "assets/animations/timerStudyMate.json",
-                        fit: BoxFit.contain,
-                        repeat: true,
-                      ),
-                    ),
-                  ),
+            child: Opacity(
+              opacity: 0.5,
+              child: Lottie.asset(
+                "assets/animations/timerStudyMate.json",
+                fit: BoxFit.contain,
+                repeat: false,
+                frameRate: FrameRate(30),
+                filterQuality: FilterQuality.low,
+                animate: true,
+              ),
+            ),
+          ),
           Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -75,7 +78,8 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                     Transform.scale(
                       scale: 1.2,
                       child: TextButton(
-                        onPressed: canStart ? () => timerService.startTimer() : null,
+                        onPressed:
+                            canStart ? () => timerService.startTimer() : null,
                         style: TextButton.styleFrom(
                           textStyle: Theme.of(context).textTheme.labelLarge,
                           backgroundColor:
@@ -88,11 +92,13 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                     Transform.scale(
                       scale: 1.2,
                       child: TextButton(
-                        onPressed: isRunning ? () => timerService.pauseTimer() : null,
+                        onPressed:
+                            isRunning ? () => timerService.pauseTimer() : null,
                         style: TextButton.styleFrom(
                           textStyle: Theme.of(context).textTheme.labelLarge,
                           side: BorderSide(
-                            color: Theme.of(context).colorScheme.primaryContainer,
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
                           ),
                         ),
                         child: Text("Pause"),
@@ -109,7 +115,8 @@ class _PomodoroWidgetState extends State<PomodoroWidget> {
                         style: TextButton.styleFrom(
                           textStyle: Theme.of(context).textTheme.labelLarge,
                           side: BorderSide(
-                            color: Theme.of(context).colorScheme.primaryContainer,
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer,
                           ),
                         ),
                         child: Text("Arrèter"),

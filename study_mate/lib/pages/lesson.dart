@@ -6,13 +6,10 @@ import "package:study_mate/pages/tasks.dart";
 import "../notifiers/objects.dart";
 
 class LessonPage extends StatefulWidget {
-  const LessonPage({
-    super.key,
-    required this.lesson,
-    });
+  const LessonPage({super.key, required this.lesson});
 
-    final Lesson lesson;
-  
+  final Lesson lesson;
+
   @override
   State<LessonPage> createState() => _LessonPageState();
 }
@@ -22,35 +19,35 @@ class _LessonPageState extends State<LessonPage> {
   late Widget page;
   @override
   Widget build(BuildContext context) {
-  uLesson = widget.lesson;
+    uLesson = widget.lesson;
 
-  if (navigationPage == 0) {
-    page = TasksWidget(lesson: widget.lesson,);
-  } else if (navigationPage == 1){
-    page = PlanWidget(lesson: widget.lesson);
-  } else if (navigationPage == 2){
-  }
+    if (navigationPage == 0) {
+      page = TasksWidget(lesson: widget.lesson);
+    } else if (navigationPage == 1) {
+      page = PlanWidget(lesson: widget.lesson);
+    } else if (navigationPage == 2) {}
     return ValueListenableBuilder(
       valueListenable: lessonsNotifier,
       builder: (context, value, child) {
         return Scaffold(
-          appBar: AppBar(
-            title: Text(widget.lesson.name),
-          ),
+          appBar: AppBar(title: Text(widget.lesson.name)),
           body: Container(
             color: Theme.of(context).colorScheme.surface,
             child: Stack(
               children: [
-              Positioned.fill(
-                    child: Opacity(
-                      opacity: 0.5,
-                      child: Lottie.asset(
-                        "assets/animations/homeStudyMate.json",
-                        fit: BoxFit.contain,
-                        repeat: true,
-                      ),
+                Positioned.fill(
+                  child: Opacity(
+                    opacity: 0.5,
+                    child: Lottie.asset(
+                      "assets/animations/homeStudyMate.json",
+                      fit: BoxFit.contain,
+                      repeat: false,
+                      frameRate: FrameRate(30),
+                      filterQuality: FilterQuality.low,
+                      animate: true,
                     ),
                   ),
+                ),
                 page,
               ],
             ),
@@ -63,14 +60,22 @@ class _LessonPageState extends State<LessonPage> {
               });
             },
             destinations: [
-              NavigationDestination(icon: Icon(Icons.task_outlined), label: "Taches"),
-              NavigationDestination(icon: Icon(Icons.calendar_today_outlined), label: "Planification"),
-              NavigationDestination(icon: Icon(Icons.timer_outlined), label: "Porodomo"),
+              NavigationDestination(
+                icon: Icon(Icons.task_outlined),
+                label: "Taches",
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.calendar_today_outlined),
+                label: "Planification",
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.timer_outlined),
+                label: "Porodomo",
+              ),
             ],
           ),
         );
-      }
+      },
     );
   }
 }
-

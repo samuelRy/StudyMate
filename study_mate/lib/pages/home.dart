@@ -19,8 +19,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-          valueListenable: pomodoroRunningNotifier,
-          builder: (context, value, child) {
+      valueListenable: pomodoroRunningNotifier,
+      builder: (context, value, child) {
         return ValueListenableBuilder(
           valueListenable: lessonsNotifier,
           builder: (context, value, child) {
@@ -34,22 +34,23 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child:
                         value.isNotEmpty
-                            ? ListView.separated(
+                            ? ListView.builder(
                               itemCount: value.length,
                               itemBuilder:
-                                  (context, index) => PersonalizedListTile(
-                                    index: index,
-                                    list: value,
-                                  ),
-                              separatorBuilder:
-                                  (context, index) => const Divider(
-                                    thickness: 5,
-                                    color: Colors.transparent,
-                                    height: 2,
+                                  (context, index) => Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 5.0,
+                                    ),
+                                    child: PersonalizedListTile(
+                                      index: index,
+                                      list: value,
+                                    ),
                                   ),
                             )
                             : const Center(
-                              child: Text("Aucune matière. Ajoutez une matière."),
+                              child: Text(
+                                "Aucune matière. Ajoutez une matière.",
+                              ),
                             ),
                   ),
                   MyTextButton(controller: controller, ver: 0),
@@ -60,7 +61,10 @@ class _HomePageState extends State<HomePage> {
                         child: PomodoroRunning(
                           timerService:
                               lessonsNotifier
-                                  .value[pomodoroRunningNotifier.value.values.first]
+                                  .value[pomodoroRunningNotifier
+                                      .value
+                                      .values
+                                      .first]
                                   .timerService,
                         ),
                       )
@@ -76,15 +80,18 @@ class _HomePageState extends State<HomePage> {
                 child: Stack(
                   children: [
                     Positioned.fill(
-                    child: Opacity(
-                      opacity: 0.5,
-                      child: Lottie.asset(
-                        "assets/animations/homeStudyMate.json",
-                        fit: BoxFit.contain,
-                        repeat: true,
+                      child: Opacity(
+                        opacity: 0.5,
+                        child: Lottie.asset(
+                          "assets/animations/homeStudyMate.json",
+                          fit: BoxFit.contain,
+                          repeat: false,
+                          frameRate: FrameRate(30),
+                          filterQuality: FilterQuality.low,
+                          animate: true,
+                        ),
                       ),
                     ),
-                  ),
                     page,
                   ],
                 ),
@@ -97,7 +104,10 @@ class _HomePageState extends State<HomePage> {
                   });
                 },
                 destinations: [
-                  NavigationDestination(icon: Icon(Icons.book_outlined), label: "Matières"),
+                  NavigationDestination(
+                    icon: Icon(Icons.book_outlined),
+                    label: "Matières",
+                  ),
                   NavigationDestination(
                     icon: Icon(Icons.bar_chart_outlined),
                     label: "Statistiques",
@@ -107,7 +117,7 @@ class _HomePageState extends State<HomePage> {
             );
           },
         );
-      }
+      },
     );
   }
 
